@@ -1,0 +1,222 @@
+:root {
+  --bg1: #fff1f6;
+  --bg2: #ffe4ec;
+  --bg3: #fde2ff;
+  --card: rgba(255, 255, 255, 0.76);
+  --text: #2a1b27;
+  --muted: #6a5568;
+  --primary: #e94b85;
+  --primary-dark: #c9376d;
+  --white: #ffffff;
+  --shadow: 0 25px 80px rgba(185, 73, 118, 0.18);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,0.9), transparent 30%),
+    linear-gradient(135deg, var(--bg1), var(--bg2) 45%, var(--bg3));
+  overflow: hidden;
+}
+
+.wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  width: min(720px, 100%);
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+  padding: 40px 28px;
+  text-align: center;
+  animation: cardEnter 1.2s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 0.74rem;
+  color: var(--primary-dark);
+  margin: 0 0 16px;
+  animation: fadeUp 1.2s 0.15s both;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.8rem, 7vw, 5.4rem);
+  line-height: 0.98;
+  margin: 0;
+  animation: fadeUp 1.2s 0.28s both;
+}
+
+h1 span {
+  color: var(--primary);
+  display: inline-block;
+  animation: pulseWord 2.8s ease-in-out infinite;
+}
+
+.subhead {
+  font-size: clamp(1rem, 2.8vw, 1.2rem);
+  color: var(--muted);
+  margin: 18px auto 30px;
+  max-width: 36ch;
+  line-height: 1.65;
+  animation: fadeUp 1.2s 0.42s both;
+}
+
+.message-box {
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(233, 75, 133, 0.15);
+  border-radius: 24px;
+  padding: 30px 22px;
+  margin: 0 auto 26px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  animation: fadeUp 1.2s 0.58s both;
+}
+
+#message {
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 600;
+  min-height: 3.2em;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+#message.changing {
+  opacity: 0;
+  transform: translateY(8px) scale(0.985);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  animation: fadeUp 1.2s 0.72s both;
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 22px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.btn:hover { transform: translateY(-2px) scale(1.02); }
+.btn:active { transform: translateY(0) scale(0.98); }
+
+.primary {
+  background: linear-gradient(135deg, #ef5c97, #df3f82);
+  color: var(--white);
+  box-shadow: 0 14px 34px rgba(223, 63, 130, 0.28);
+}
+
+.secondary {
+  background: rgba(255,255,255,0.7);
+  color: var(--primary-dark);
+  border: 1px solid rgba(223, 63, 130, 0.12);
+}
+
+.footer-note {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  animation: fadeUp 1.2s 0.84s both;
+}
+
+.background-glow {
+  position: fixed;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.45;
+  z-index: 0;
+  animation: drift 14s ease-in-out infinite alternate;
+}
+
+.glow-1 {
+  top: -120px;
+  left: -80px;
+  background: rgba(255, 133, 179, 0.65);
+}
+
+.glow-2 {
+  right: -120px;
+  bottom: -140px;
+  background: rgba(216, 147, 255, 0.6);
+  animation-duration: 18s;
+}
+
+#hearts-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  bottom: -40px;
+  font-size: 22px;
+  opacity: 0.8;
+  animation: floatUp linear forwards;
+  filter: drop-shadow(0 8px 16px rgba(233,75,133,0.2));
+}
+
+@keyframes cardEnter {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseWord {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(60px, 40px, 0) scale(1.08); }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 0.85; }
+  100% {
+    transform: translateY(-115vh) translateX(var(--drift)) scale(1.25) rotate(16deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  body { overflow: auto; }
+  .card { padding: 34px 20px; border-radius: 26px; }
+  .actions { flex-direction: column; }
+  .btn { width: 100%; }
+}
