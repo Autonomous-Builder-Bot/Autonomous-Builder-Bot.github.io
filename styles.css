@@ -190,29 +190,9 @@ h1 span {
   line-height: 1.7;
 }
 
-.quote-card,
-.song-card {
+.song-list-card {
   padding: 28px 26px;
   margin-top: 20px;
-}
-
-.quote-card {
-  text-align: center;
-}
-
-#quote {
-  margin: 0 auto 20px;
-  max-width: 28ch;
-  font-family: "Playfair Display", serif;
-  font-size: clamp(1.55rem, 3vw, 2.2rem);
-  line-height: 1.35;
-}
-
-.song-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
 }
 
 .song-copy h2 {
@@ -222,10 +202,61 @@ h1 span {
 }
 
 .song-copy p {
-  margin: 0;
+  margin: 0 0 22px;
   color: var(--muted);
   line-height: 1.7;
   max-width: 50ch;
+}
+
+.songs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.song-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 152px;
+  padding: 20px 20px 18px;
+  border-radius: 24px;
+  text-decoration: none;
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.74));
+  border: 1px solid rgba(223, 63, 130, 0.12);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.song-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px rgba(185, 73, 118, 0.14);
+  border-color: rgba(223, 63, 130, 0.24);
+}
+
+.song-item strong {
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.song-item span:last-child {
+  margin-top: auto;
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 0.96rem;
+}
+
+.song-tag {
+  align-self: flex-start;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(233, 75, 133, 0.10);
+  color: var(--primary-dark);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .footer-note {
@@ -304,13 +335,9 @@ h1 span {
 }
 
 @media (max-width: 860px) {
-  .story-grid {
+  .story-grid,
+  .songs-grid {
     grid-template-columns: 1fr;
-  }
-
-  .song-card {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 
@@ -322,15 +349,13 @@ h1 span {
   }
 
   .hero,
-  .quote-card,
-  .song-card,
+  .song-list-card,
   .mini-card {
     border-radius: 24px;
   }
 
   .hero,
-  .quote-card,
-  .song-card {
+  .song-list-card {
     padding: 26px 18px;
   }
 
@@ -345,5 +370,9 @@ h1 span {
 
   .btn {
     width: 100%;
+  }
+
+  .song-item {
+    min-height: auto;
   }
 }
