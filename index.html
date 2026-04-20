@@ -6,7 +6,7 @@
   <title>Colin Loves Lyndsey</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -15,22 +15,62 @@
   <div id="hearts-container" aria-hidden="true"></div>
 
   <main class="wrap">
-    <section class="card">
+    <section class="hero card">
       <p class="eyebrow">A little corner of the internet for Lyndsey</p>
       <h1>Colin <span>loves</span> Lyndsey</h1>
-      <p class="subhead">Whenever you want a reminder, this page is here waiting for you.</p>
+      <p class="subhead">Not the cheesy kind. The kind that enters tired rooms dancing, makes space for others, and somehow feels more real every day.</p>
 
       <div class="message-box">
-        <p id="message">You are loved. Deeply, truly, and always.</p>
+        <p class="message-label">A reason I love you</p>
+        <p id="message">You make the hard rooms lighter.</p>
       </div>
 
       <div class="actions">
-        <button id="new-message" class="btn primary">Another reminder</button>
-        <button id="send-hearts" class="btn secondary">Send hearts</button>
+        <button id="new-message" class="btn primary" type="button">Show me another reason</button>
+        <button id="send-hearts" class="btn secondary" type="button">Send a little chaos</button>
+        <a class="btn tertiary" href="#song">Our song</a>
       </div>
-
-      <p class="footer-note">Made by Colin, for Lyndsey 💗</p>
     </section>
+
+    <section class="story-grid">
+      <article class="mini-card">
+        <p class="mini-label">What I noticed first</p>
+        <h2>You were bright enough to change the weather.</h2>
+        <p>I saw it in the hard rooms: the dancing, the walks, the patience, the way you brought warmth without pretending the weight was not there.</p>
+      </article>
+
+      <article class="mini-card">
+        <p class="mini-label">What it did to me</p>
+        <h2>When you were there, I could breathe.</h2>
+        <p>You made care feel shared. You made me less afraid. You made me trust not just what I felt, but who you are.</p>
+      </article>
+
+      <article class="mini-card">
+        <p class="mini-label">What we are becoming</p>
+        <h2>We make room for people we love.</h2>
+        <p>Lunch for my mom, warmth in the kitchen, making space together — that feels more like love to me than any borrowed script ever could.</p>
+      </article>
+    </section>
+
+    <section class="card quote-card">
+      <p class="mini-label">A line I never want to forget</p>
+      <blockquote id="quote">This is a love story neither of us would write — which is how I know it’s real.</blockquote>
+      <button id="new-quote" class="btn quote-btn" type="button">Another line from our song</button>
+    </section>
+
+    <section id="song" class="card song-card">
+      <div class="song-copy">
+        <p class="mini-label">The song I made for you</p>
+        <h2>A Love Story Neither of Us Would Write</h2>
+        <p>Because the best parts of us do not feel scripted. They feel lived, shared, and true.</p>
+      </div>
+      <div class="song-actions">
+        <a class="btn primary" href="https://suno.com/s/uwm3MAKeCr4P7zcf" target="_blank" rel="noopener noreferrer">Listen on Suno</a>
+        <button id="song-hearts" class="btn secondary" type="button">Give the song some hearts</button>
+      </div>
+    </section>
+
+    <p class="footer-note">Made by Colin, for Lyndsey 💗</p>
   </main>
 
   <script src="script.js"></script>
