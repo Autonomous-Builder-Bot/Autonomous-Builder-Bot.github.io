@@ -1,35 +1,21 @@
 const messages = [
-  "You make the hard rooms lighter.",
-  "When you were there, I could breathe.",
-  "You made care look less like burden, more like art.",
-  "I love how naturally we make room for people we love.",
-  "You are caring with backbone — tender and tough at the same time.",
-  "You call me into strength when anxiety tries to make me smaller.",
-  "I trust the kind of love that enters tired rooms dancing.",
-  "Making lunch with you for people we love felt like a glimpse of our life.",
-  "This feels real because it does not feel scripted.",
-  "You are one of the easiest people in the world to trust."
-];
-
-const quotes = [
-  "This is a love story neither of us would write — which is how I know it’s real.",
-  "No borrowed lines, no pretty lie to hide in.",
-  "Just bright enough to change the weather, just human enough to reach the hard.",
-  "All I know is when you were there, I could breathe.",
-  "Maybe that’s the closest thing I have to faith: what grows around us when we give ourselves away.",
-  "This is the kind of love I trust — the kind that enters tired rooms dancing and leaves them lighter than it found them."
+  "You are deeply loved.",
+  "No matter what kind of day this is, this page is here for you.",
+  "You make life better in a hundred quiet ways.",
+  "This little website exists because you matter to me.",
+  "You are one of my favorite parts of life.",
+  "You deserve reminders that are soft, warm, and real.",
+  "I will keep making things for you.",
+  "You make ordinary days feel brighter.",
+  "You are loved more than a small page can say."
 ];
 
 const messageEl = document.getElementById('message');
-const quoteEl = document.getElementById('quote');
 const newMessageBtn = document.getElementById('new-message');
-const newQuoteBtn = document.getElementById('new-quote');
 const heartsBtn = document.getElementById('send-hearts');
-const songHeartsBtn = document.getElementById('song-hearts');
 const heartsContainer = document.getElementById('hearts-container');
 
 let currentMessageIndex = 0;
-let currentQuoteIndex = 0;
 
 function showText(el, text) {
   el.classList.add('changing');
@@ -52,11 +38,6 @@ function nextMessage() {
   showText(messageEl, messages[currentMessageIndex]);
 }
 
-function nextQuote() {
-  currentQuoteIndex = nextFrom(quotes, currentQuoteIndex);
-  showText(quoteEl, quotes[currentQuoteIndex]);
-}
-
 function createHeart(burst = false) {
   const heart = document.createElement('div');
   heart.className = 'heart';
@@ -76,9 +57,7 @@ function heartBurst() {
 }
 
 newMessageBtn.addEventListener('click', nextMessage);
-newQuoteBtn.addEventListener('click', nextQuote);
 heartsBtn.addEventListener('click', heartBurst);
-songHeartsBtn.addEventListener('click', heartBurst);
 document.body.addEventListener('click', (event) => {
   if (event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') {
     createHeart(true);
