@@ -593,7 +593,8 @@ function restoreSession() {
     gameState.answeredLevels = Array.isArray(saved.answeredLevels) ? saved.answeredLevels : [{}, {}];
     gameState.claimedMilestones = new Set(saved.claimedMilestones || []);
     gameState.claimedSecrets = new Set(saved.claimedSecrets || []);
-    gameState.claimedAchievements = new Set(saved.claimedAchievements || []);
+        gameState.claimedAchievements = new Set(saved.claimedAchievements || []);
+    gameState.claimedRewards = Array.isArray(saved.claimedRewards) ? saved.claimedRewards : [];
     gameState.rewardQueue = Array.isArray(saved.rewardQueue) ? saved.rewardQueue : [];
     if (saved.activeReward) gameState.rewardQueue.unshift(saved.activeReward);
     gameState.activeReward = null;
