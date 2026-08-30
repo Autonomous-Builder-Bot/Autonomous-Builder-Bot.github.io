@@ -573,11 +573,9 @@ function checkRewards(playerIndex, level) {
     }
   });
 
-  if (level === 'brutal') {
-    gameState.answeredLevels[playerIndex].brutal = (gameState.answeredLevels[playerIndex].brutal || 0) + 1;
-  }
-
+  
   if (
+
     gameState.answeredLevels[0].brutal > 0 &&
     gameState.answeredLevels[1].brutal > 0 &&
     !gameState.claimedAchievements.has('both-brutal')
