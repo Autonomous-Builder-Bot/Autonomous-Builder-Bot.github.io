@@ -340,6 +340,7 @@ const gameState = {
 };
 
 const gameQuestion = document.getElementById('game-question');
+const questionPrompt = document.getElementById('question-prompt');
 const questionCard = document.getElementById('question-card');
 const turnLabel = document.getElementById('turn-label');
 const levelChip = document.getElementById('level-chip');
