@@ -847,9 +847,15 @@ function resetGame() {
 document.getElementById('game-answer').addEventListener('click', () => advance('answered'));
 document.getElementById('game-sip').addEventListener('click', () => advance('sip'));
 document.getElementById('game-skip').addEventListener('click', () => advance('skip'));
-document.getElementById('game-shuffle').addEventListener('click', buildDeck);
+document.getElementById('game-shuffle').addEventListener('click', () => {
+  buildDeck();
+  saveSession();
+});
 document.getElementById('game-reset').addEventListener('click', resetGame);
-difficultySelect.addEventListener('change', buildDeck);
+difficultySelect.addEventListener('change', () => {
+  buildDeck();
+  saveSession();
+});
 rewardClose.addEventListener('click', closeReward);
 rewardModal.addEventListener('click', event => {
   if (event.target === rewardModal) closeReward();
