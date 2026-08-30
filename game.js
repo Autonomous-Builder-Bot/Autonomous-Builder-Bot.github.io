@@ -382,10 +382,74 @@ function updateDeckLabels() {
   });
 }
 
+function buildGuidedDeck(pool) {
+  const buckets = pool.reduce((groups, question) => {
+    if (!groups[question.level]) groups[question.level] = [];
+    groups[question.level].push(question);
+    return groups;
+  }, {});
+
+  Object.keys(buckets).forEach(level => {
+    buckets[level] = shuffle(buckets[level]);
+  });
+
+  const startingCounts = Object.fromEntries(
+    Object.entries(buckets).map(([level, questions]) => [level, questions.length])
+  );
+  const deck = [];
+  const intenseLevels = new Set(['hard', 'brutal']);
+  const bondingLevels = ['closer', 'warm', 'easy'];
+
+  while (Object.values(buckets).some(questions => questions.length)) {
+    let available = Object.keys(buckets).filter(level => buckets[level].length);
+    const last = deck[deck.length - 1]?.level;
+    const secondLast = deck[deck.length - 2]?.level;
+
+    // Never allow three cards of the same type in a row when another type exists.
+    if (last && last === secondLast) {
+      const alternatives = available.filter(level => level !== last);
+      if (alternatives.length) available = alternatives;
+    }
+
+    // A challenging card should usually open into connection instead of another challenge.
+    let preferred = [];
+    if (last === 'brutal') {
+      preferred = bondingLevels.filter(level => available.includes(level));
+    } else if (last === 'hard') {
+      preferred = ['closer', 'warm', 'vulnerable', 'easy'].filter(level => available.includes(level));
+    } else if (last === 'vulnerable' && Math.random() < 0.5) {
+      preferred = ['closer', 'warm'].filter(level => available.includes(level));
+    }
+
+    const candidates = preferred.length ? preferred : available;
+    const scored = candidates.map(level => {
+      const remainingRatio = buckets[level].length / startingCounts[level];
+      const connectionBias = level === 'closer' ? 0.08 : 0;
+      const challengePenalty = intenseLevels.has(level) && intenseLevels.has(last) ? -0.2 : 0;
+      return {
+        level,
+        score: remainingRatio + connectionBias + challengePenalty + Math.random() * 0.12
+      };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+    deck.push(buckets[scored[0].level].pop());
+  }
+
+  return deck;
+}
+
+function createDeck(selected) {
+  const pool = selected === 'all'
+    ? coupleQuestions
+    : coupleQuestions.filter(question => question.level === selected);
+
+  return selected === 'all' ? buildGuidedDeck(pool) : shuffle(pool);
+}
+
 function buildDeck() {
   const selected = difficultySelect.value;
-  const pool = selected === 'all' ? coupleQuestions : coupleQuestions.filter(q => q.level === selected);
-  gameState.deck = shuffle(pool);
+  gameState.deck = createDeck(selected);
   gameState.position = 0;
   renderQuestion(false);
 }
