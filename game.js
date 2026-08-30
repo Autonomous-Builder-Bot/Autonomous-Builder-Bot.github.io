@@ -326,7 +326,7 @@ const coupleQuestions = [
   {level:'closer', text:"If you could make me fully understand one thing about how much I matter to you, what would you want me to understand?"}
 ];
 
-const levelNames = {easy:'Easy', warm:'Warm', vulnerable:'Vulnerable', hard:'Hard', brutal:'Brutal'};
+const levelNames = {easy:'Easy', warm:'Warm', vulnerable:'Vulnerable', hard:'Hard', brutal:'Brutal', closer:'Closer'};
 const players = ['Colin', 'Lyndsey'];
 const gameState = {
   player: 0,
