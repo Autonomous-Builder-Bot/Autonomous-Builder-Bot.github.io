@@ -727,25 +727,29 @@ function renderQuestion(animate = true) {
 
 function advance(result) {
   const currentPlayer = gameState.player;
+  const currentQuestion = gameState.deck[gameState.position];
 
   if (result === 'answered') {
     gameState.answered[currentPlayer] += 1;
+    gameState.points[currentPlayer] += 1;
+    gameState.answeredLevels[currentPlayer][currentQuestion.level] =
+      (gameState.answeredLevels[currentPlayer][currentQuestion.level] || 0) + 1;
+    checkRewards(currentPlayer, currentQuestion.level);
   }
 
   if (result === 'sip') {
     gameState.sips[currentPlayer] += 1;
-    gameState.scores[currentPlayer] += 1;
   }
 
   if (result === 'skip') {
     gameState.skips[currentPlayer] += 1;
-    gameState.scores[currentPlayer] += 2;
   }
 
   gameState.turns += 1;
   gameState.player = currentPlayer === 0 ? 1 : 0;
   gameState.position += 1;
   updateScoreboard();
+  updateRace();
   renderQuestion(true);
 }
 
