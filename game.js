@@ -533,9 +533,76 @@ function closeReward() {
   window.setTimeout(() => {
     rewardModal.hidden = true;
     gameState.rewardOpen = false;
+    gameState.activeReward = null;
+    saveSession();
     showNextReward();
   }, 160);
 }
+
+function saveSession() {
+  try {
+    const saved = {
+      player: gameState.player,
+      deck: gameState.deck,
+      position: gameState.position,
+      turns: gameState.turns,
+      points: gameState.points,
+      answered: gameState.answered,
+      sips: gameState.sips,
+      skips: gameState.skips,
+      answeredLevels: gameState.answeredLevels,
+      claimedMilestones: [...gameState.claimedMilestones],
+      claimedSecrets: [...gameState.claimedSecrets],
+      claimedAchievements: [...gameState.claimedAchievements],
+      rewardQueue: gameState.rewardQueue,
+      activeReward: gameState.activeReward,
+      difficulty: difficultySelect.value
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+  } catch (error) {
+    // The game still works normally if private browsing blocks local storage.
+  }
+}
+
+function restoreSession() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const saved = JSON.parse(raw);
+    if (!Array.isArray(saved.points) || saved.points.length !== 2) return false;
+
+    difficultySelect.value = saved.difficulty || 'all';
+    gameState.player = saved.player === 1 ? 1 : 0;
+    gameState.deck = Array.isArray(saved.deck) && saved.deck.length
+      ? saved.deck
+      : createDeck(difficultySelect.value);
+    gameState.position = Number.isInteger(saved.position) ? saved.position : 0;
+    gameState.turns = Number.isInteger(saved.turns) ? saved.turns : 0;
+    gameState.points = saved.points;
+    gameState.answered = Array.isArray(saved.answered) ? saved.answered : [0, 0];
+    gameState.sips = Array.isArray(saved.sips) ? saved.sips : [0, 0];
+    gameState.skips = Array.isArray(saved.skips) ? saved.skips : [0, 0];
+    gameState.answeredLevels = Array.isArray(saved.answeredLevels) ? saved.answeredLevels : [{}, {}];
+    gameState.claimedMilestones = new Set(saved.claimedMilestones || []);
+    gameState.claimedSecrets = new Set(saved.claimedSecrets || []);
+    gameState.claimedAchievements = new Set(saved.claimedAchievements || []);
+    gameState.rewardQueue = Array.isArray(saved.rewardQueue) ? saved.rewardQueue : [];
+    if (saved.activeReward) gameState.rewardQueue.unshift(saved.activeReward);
+    gameState.activeReward = null;
+    gameState.rewardOpen = false;
+    rewardModal.hidden = true;
+    rewardModal.classList.remove('show');
+
+    updateScoreboard();
+    updateRace();
+    renderQuestion(false);
+    showNextReward();
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 
 function updateRace() {
   pointsColin.textContent = `${gameState.points[0]} ♥`;
