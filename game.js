@@ -423,9 +423,16 @@ const gameStats = document.getElementById('game-stats');
 const difficultySelect = document.getElementById('difficulty-select');
 const colinPill = document.getElementById('player-colin');
 const lyndseyPill = document.getElementById('player-lyndsey');
-const scoreColin = document.getElementById('score-colin');
-const scoreLyndsey = document.getElementById('score-lyndsey');
-const scoreLeader = document.getElementById('score-leader');
+const pointsColin = document.getElementById('points-colin');
+const pointsLyndsey = document.getElementById('points-lyndsey');
+const nextMilestone = document.getElementById('next-milestone');
+const raceProgress = document.getElementById('race-progress');
+const rewardModal = document.getElementById('reward-modal');
+const rewardKicker = document.getElementById('reward-kicker');
+const rewardTitle = document.getElementById('reward-title');
+const rewardCopy = document.getElementById('reward-copy');
+const rewardOptions = document.getElementById('reward-options');
+const rewardClose = document.getElementById('reward-close');
 
 function shuffle(list) {
   const copy = [...list];
