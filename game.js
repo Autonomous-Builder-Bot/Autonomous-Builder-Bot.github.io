@@ -503,7 +503,8 @@ function enqueueReward(reward) {
 
 function showNextReward() {
   if (gameState.rewardOpen || !gameState.rewardQueue.length) return;
-  const reward = gameState.rewardQueue.shift();
+    const reward = gameState.rewardQueue.shift();
+  gameState.activeReward = reward;
   gameState.rewardOpen = true;
   rewardKicker.textContent = reward.kicker || 'Reward unlocked';
   rewardTitle.textContent = reward.title;
