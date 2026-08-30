@@ -409,8 +409,9 @@ const gameState = {
   claimedMilestones: new Set(),
   claimedSecrets: new Set(),
   claimedAchievements: new Set(),
-  rewardQueue: [],
-  rewardOpen: false
+    rewardQueue: [],
+  rewardOpen: false,
+  activeReward: null
 };
 
 const gameQuestion = document.getElementById('game-question');
