@@ -214,20 +214,8 @@ function updatePlayers() {
 }
 
 function updateScoreboard() {
-  scoreColin.textContent = gameState.scores[0];
-  scoreLyndsey.textContent = gameState.scores[1];
-
-  if (gameState.scores[0] === gameState.scores[1]) {
-    scoreLeader.textContent = 'All square';
-  } else {
-    const leader = gameState.scores[0] < gameState.scores[1] ? 0 : 1;
-    const difference = Math.abs(gameState.scores[0] - gameState.scores[1]);
-    scoreLeader.textContent = `${players[leader]} leads by ${difference}`;
-  }
-
-  const totalSips = gameState.sips[0] + gameState.sips[1];
   const totalSkips = gameState.skips[0] + gameState.skips[1];
-  gameStats.textContent = `${gameState.turns} cards played · ${totalSips} sips · ${totalSkips} skips`;
+  gameStats.textContent = `Colin: ${gameState.sips[0]} sips · Lyndsey: ${gameState.sips[1]} sips · ${totalSkips} skips`;
 }
 
 function renderQuestion(animate = true) {
