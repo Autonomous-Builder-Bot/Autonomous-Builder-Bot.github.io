@@ -777,6 +777,14 @@ document.getElementById('game-skip').addEventListener('click', () => advance('sk
 document.getElementById('game-shuffle').addEventListener('click', buildDeck);
 document.getElementById('game-reset').addEventListener('click', resetGame);
 difficultySelect.addEventListener('change', buildDeck);
+rewardClose.addEventListener('click', closeReward);
+rewardModal.addEventListener('click', event => {
+  if (event.target === rewardModal) closeReward();
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && gameState.rewardOpen) closeReward();
+});
 
 updateDeckLabels();
 resetGame();
