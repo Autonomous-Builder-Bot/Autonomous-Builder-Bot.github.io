@@ -120,7 +120,17 @@
         </div>
       </div>
 
-                        <p class="game-rule"><strong>Guided mix:</strong> it avoids three of the same type in a row and brings the conversation back toward connection after heavier cards. Lowest sip count wins, and either person can skip any card anytime.</p>
+                              <p class="game-rule"><strong>Points:</strong> answer a question to earn 1 point. Sips and skips earn 0. Race to the next reward, while the game quietly tracks a few hidden surprises in the background.</p>
+
+      <div id="reward-modal" class="reward-modal" hidden>
+        <div class="reward-modal-card" role="dialog" aria-modal="true" aria-labelledby="reward-title">
+          <p id="reward-kicker" class="reward-kicker">Reward unlocked</p>
+          <h3 id="reward-title">Choose your reward</h3>
+          <p id="reward-copy" class="reward-copy"></p>
+          <div id="reward-options" class="reward-options"></div>
+          <button id="reward-close" class="reward-close" type="button">Keep playing</button>
+        </div>
+      </div>
     </section>
 
     <section id="songs" class="card song-list-card">
