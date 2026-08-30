@@ -866,4 +866,4 @@ document.addEventListener('keydown', event => {
 });
 
 updateDeckLabels();
-resetGame();
+if (!restoreSession()) resetGame();
