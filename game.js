@@ -867,8 +867,9 @@ function resetGame() {
   gameState.answeredLevels = [{}, {}];
   gameState.claimedMilestones = new Set();
   gameState.claimedSecrets = new Set();
-  gameState.claimedAchievements = new Set();
-    gameState.rewardQueue = [];
+    gameState.claimedAchievements = new Set();
+  gameState.claimedRewards = [];
+  gameState.rewardQueue = [];
   gameState.rewardOpen = false;
   gameState.activeReward = null;
   try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
