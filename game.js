@@ -368,7 +368,7 @@ function updateDeckLabels() {
   }, {});
 
   const labels = {
-    all: `Full mix · all ${coupleQuestions.length}`,
+        all: `Guided mix · all ${coupleQuestions.length}`,
     easy: `Easy · ${counts.easy || 0} playful`,
     warm: `Warm · ${counts.warm || 0} flirty`,
     vulnerable: `Vulnerable · ${counts.vulnerable || 0} honest`,
