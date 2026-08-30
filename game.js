@@ -388,4 +388,5 @@ document.getElementById('game-shuffle').addEventListener('click', buildDeck);
 document.getElementById('game-reset').addEventListener('click', resetGame);
 difficultySelect.addEventListener('change', buildDeck);
 
+updateDeckLabels();
 resetGame();
