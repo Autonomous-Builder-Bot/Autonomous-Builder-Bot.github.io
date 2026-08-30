@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffe7ef" />
   <title>Colin Loves Lyndsey</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="game.css" />
 </head>
 <body>
   <div class="background-glow glow-1"></div>
@@ -18,7 +20,7 @@
     <section class="hero card">
       <p class="eyebrow">A little corner of the internet for Lyndsey</p>
       <h1>Colin <span>loves</span> Lyndsey</h1>
-      <p class="subhead">A soft place to land whenever you want a reminder.</p>
+      <p class="subhead">A soft place to land whenever you want a reminder — and now, a place to play together too.</p>
 
       <div class="message-box">
         <p class="message-label">A little reminder</p>
@@ -27,6 +29,7 @@
 
       <div class="actions">
         <button id="new-message" class="btn primary" type="button">Show another note</button>
+        <a class="btn secondary" href="#game">Answer or Sip</a>
         <button id="send-hearts" class="btn secondary" type="button">Send hearts</button>
         <a class="btn tertiary" href="#songs">Our songs</a>
       </div>
@@ -50,6 +53,61 @@
         <h2>You make life better.</h2>
         <p>That is the whole point of this website, and it stays true on easy days, messy days, and ordinary ones too.</p>
       </article>
+    </section>
+
+    <section id="game" class="card game-card" aria-labelledby="game-title">
+      <div class="game-heading">
+        <div class="game-copy">
+          <p class="mini-label">Just us</p>
+          <h2 id="game-title">Answer or Sip</h2>
+          <p>Take turns. Answer the card, take one sip, or skip it with no explanation needed. The cards get much more honest if you choose the harder decks.</p>
+        </div>
+
+        <div class="game-mode">
+          <label for="difficulty-select">Choose the deck</label>
+          <select id="difficulty-select" aria-label="Question difficulty">
+            <option value="all">Mix all 80</option>
+            <option value="easy">Easy · playful</option>
+            <option value="warm">Warm · flirty</option>
+            <option value="vulnerable">Vulnerable · honest</option>
+            <option value="hard">Hard · no hiding</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="player-row" aria-label="Current player">
+        <span id="player-colin" class="player-pill active">Colin</span>
+        <span class="turn-arrow" aria-hidden="true">↔</span>
+        <span id="player-lyndsey" class="player-pill">Lyndsey</span>
+      </div>
+
+      <div class="question-shell">
+        <article id="question-card" class="question-card" aria-live="polite">
+          <div class="question-meta">
+            <span id="turn-label" class="turn-label">Colin's turn</span>
+            <span id="level-chip" class="level-chip">Easy</span>
+            <span id="card-count" class="card-count">1 / 80</span>
+          </div>
+          <p id="game-question">What was your first impression of me?</p>
+          <p class="question-prompt">Talk it out, sip once, or skip. No pressure to explain a skip.</p>
+        </article>
+      </div>
+
+      <div class="game-actions" aria-label="Answer or Sip controls">
+        <button id="game-answer" class="game-action answer" type="button">✓ Answered</button>
+        <button id="game-sip" class="game-action sip" type="button">🥂 Take a sip</button>
+        <button id="game-skip" class="game-action skip" type="button">Skip this one</button>
+      </div>
+
+      <div class="game-footer">
+        <div id="game-stats" class="game-stats">0 answered · 0 sips · 0 skips</div>
+        <div class="game-tools">
+          <button id="game-shuffle" class="game-tool" type="button">Shuffle deck</button>
+          <button id="game-reset" class="game-tool" type="button">Start over</button>
+        </div>
+      </div>
+
+      <p class="game-rule">House rule: “sip” means one normal sip, not a shot. Either person can skip any card, anytime.</p>
     </section>
 
     <section id="songs" class="card song-list-card">
@@ -102,5 +160,6 @@
   </main>
 
   <script src="script.js"></script>
+  <script src="game.js"></script>
 </body>
 </html>
