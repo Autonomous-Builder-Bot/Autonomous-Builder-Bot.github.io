@@ -622,6 +622,31 @@ function updateRace() {
     : 'All visible rewards unlocked';
 }
 
+function updateRewardVault() {
+  rewardVaultCount.textContent = `${gameState.claimedRewards.length} saved`;
+  rewardVaultList.innerHTML = '';
+
+  if (!gameState.claimedRewards.length) {
+    const empty = document.createElement('p');
+    empty.className = 'reward-vault-empty';
+    empty.textContent = 'Chosen rewards will stay here.';
+    rewardVaultList.appendChild(empty);
+    return;
+  }
+
+  gameState.claimedRewards.forEach(reward => {
+    const item = document.createElement('article');
+    item.className = 'reward-vault-item';
+    const title = document.createElement('strong');
+    title.textContent = reward.title;
+    const text = document.createElement('span');
+    text.textContent = reward.text;
+    item.append(title, text);
+    rewardVaultList.appendChild(item);
+  });
+}
+
+
 function checkRewards(playerIndex, level) {
   const points = gameState.points[playerIndex];
   const milestone = raceMilestones.find(item => points >= item.points && !gameState.claimedMilestones.has(item.points));
