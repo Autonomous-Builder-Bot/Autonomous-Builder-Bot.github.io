@@ -332,7 +332,7 @@ function renderQuestion(animate = true) {
     turnLabel.textContent = `${players[gameState.player]}'s turn`;
     levelChip.textContent = levelNames[q.level];
     levelChip.dataset.level = q.level;
-    cardCount.textContent = `${gameState.position + 1} / ${gameState.deck.length}`;
+        cardCount.textContent = `Card ${gameState.position + 1} of ${gameState.deck.length}`;
     updatePlayers();
     questionCard.classList.remove('is-leaving');
   };
