@@ -443,6 +443,156 @@ function shuffle(list) {
   return copy;
 }
 
+function pickRewards(list, count = 3) {
+  return shuffle(list).slice(0, Math.min(count, list.length));
+}
+
+function secretRewardFor(total) {
+  if (total === 50) {
+    return {
+      title: 'Something extra just unlocked',
+      copy: 'Each of you picks one small thing you would genuinely enjoy doing together this week. Flip a coin for which one happens first.',
+      options: ['Save this secret reward']
+    };
+  }
+  if (total === 100) {
+    return {
+      title: 'Secret unlocked: Memory Night',
+      copy: 'Choose one favorite relationship memory and recreate one piece of it — the food, place, music, activity, or feeling.',
+      options: ['Save Memory Night']
+    };
+  }
+  if (total === 150) {
+    return {
+      title: 'Secret unlocked: Surprise Token',
+      copy: 'Randomly choose one person to surprise the other with a thoughtful mini-plan sometime in the next two weeks.',
+      options: ['Save the Surprise Token']
+    };
+  }
+  if (total === 200) {
+    const planner = Math.random() < 0.5 ? 0 : 1;
+    const payer = planner === 0 ? 1 : 0;
+    return {
+      title: 'Secret unlocked: Date Night',
+      copy: `${players[planner]} plans the date. ${players[payer]} pays. Agree on a comfortable maximum budget together before the planning starts — then the planner gets creative.`,
+      options: ['Lock in Date Night']
+    };
+  }
+  if (total === 300) {
+    const chooser = Math.random() < 0.5 ? 0 : 1;
+    const organizer = chooser === 0 ? 1 : 0;
+    return {
+      title: 'Secret unlocked: Adventure Split',
+      copy: `${players[chooser]} chooses the adventure. ${players[organizer]} handles the logistics. Keep the scope comfortable for both of you.`,
+      options: ['Save Adventure Split']
+    };
+  }
+  return {
+    title: 'Secret unlocked: Legendary Date',
+    copy: 'Choose one relationship experience that feels unusually special and make a real plan for it together. It can be simple — it just has to feel memorable.',
+    options: ['Save the Legendary Date']
+  };
+}
+
+function enqueueReward(reward) {
+  gameState.rewardQueue.push(reward);
+  showNextReward();
+}
+
+function showNextReward() {
+  if (gameState.rewardOpen || !gameState.rewardQueue.length) return;
+  const reward = gameState.rewardQueue.shift();
+  gameState.rewardOpen = true;
+  rewardKicker.textContent = reward.kicker || 'Reward unlocked';
+  rewardTitle.textContent = reward.title;
+  rewardCopy.textContent = reward.copy || 'Choose the one that sounds best right now.';
+  rewardOptions.innerHTML = '';
+
+  reward.options.forEach(text => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'reward-option';
+    button.textContent = text;
+    button.addEventListener('click', () => {
+      [...rewardOptions.children].forEach(option => option.disabled = true);
+      button.classList.add('selected');
+      rewardCopy.textContent = `Locked in: ${text}`;
+    });
+    rewardOptions.appendChild(button);
+  });
+
+  rewardModal.hidden = false;
+  requestAnimationFrame(() => rewardModal.classList.add('show'));
+}
+
+function closeReward() {
+  rewardModal.classList.remove('show');
+  window.setTimeout(() => {
+    rewardModal.hidden = true;
+    gameState.rewardOpen = false;
+    showNextReward();
+  }, 160);
+}
+
+function updateRace() {
+  pointsColin.textContent = `${gameState.points[0]} ♥`;
+  pointsLyndsey.textContent = `${gameState.points[1]} ♥`;
+  raceProgress.textContent = `Colin ${gameState.points[0]} · Lyndsey ${gameState.points[1]}`;
+
+  const next = raceMilestones.find(milestone => !gameState.claimedMilestones.has(milestone.points));
+  nextMilestone.textContent = next
+    ? `First to ${next.points} · ${next.name}`
+    : 'All visible rewards unlocked';
+}
+
+function checkRewards(playerIndex, level) {
+  const points = gameState.points[playerIndex];
+  const milestone = raceMilestones.find(item => points >= item.points && !gameState.claimedMilestones.has(item.points));
+
+  if (milestone) {
+    gameState.claimedMilestones.add(milestone.points);
+    enqueueReward({
+      kicker: `${players[playerIndex]} reached ${milestone.points} points`,
+      title: milestone.name,
+      copy: 'You got there first. Pick one relationship reward:',
+      options: pickRewards(milestone.rewards, 3)
+    });
+  }
+
+  const combined = gameState.points[0] + gameState.points[1];
+  secretMilestones.forEach(total => {
+    if (combined >= total && !gameState.claimedSecrets.has(total)) {
+      gameState.claimedSecrets.add(total);
+      const secret = secretRewardFor(total);
+      enqueueReward({
+        kicker: '✦ Secret unlocked',
+        title: secret.title,
+        copy: secret.copy,
+        options: secret.options
+      });
+    }
+  });
+
+  if (level === 'brutal') {
+    gameState.answeredLevels[playerIndex].brutal = (gameState.answeredLevels[playerIndex].brutal || 0) + 1;
+  }
+
+  if (
+    gameState.answeredLevels[0].brutal > 0 &&
+    gameState.answeredLevels[1].brutal > 0 &&
+    !gameState.claimedAchievements.has('both-brutal')
+  ) {
+    gameState.claimedAchievements.add('both-brutal');
+    enqueueReward({
+      kicker: '✦ Hidden achievement',
+      title: 'We Actually Talked',
+      copy: 'You each answered a Brutal card. Before moving on, each choose one small thing from tonight’s conversation that you want to remember.',
+      options: ['Keep this one']
+    });
+  }
+}
+
+
 function updateDeckLabels() {
   const counts = coupleQuestions.reduce((totals, question) => {
     totals[question.level] = (totals[question.level] || 0) + 1;
