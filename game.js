@@ -280,6 +280,26 @@ function shuffle(list) {
   return copy;
 }
 
+function updateDeckLabels() {
+  const counts = coupleQuestions.reduce((totals, question) => {
+    totals[question.level] = (totals[question.level] || 0) + 1;
+    return totals;
+  }, {});
+
+  const labels = {
+    all: `Full mix · all ${coupleQuestions.length}`,
+    easy: `Easy · ${counts.easy || 0} playful`,
+    warm: `Warm · ${counts.warm || 0} flirty`,
+    vulnerable: `Vulnerable · ${counts.vulnerable || 0} honest`,
+    hard: `Hard · ${counts.hard || 0} no hiding`,
+    brutal: `Brutal · ${counts.brutal || 0} relationship test`
+  };
+
+  [...difficultySelect.options].forEach(option => {
+    if (labels[option.value]) option.textContent = labels[option.value];
+  });
+}
+
 function buildDeck() {
   const selected = difficultySelect.value;
   const pool = selected === 'all' ? coupleQuestions : coupleQuestions.filter(q => q.level === selected);
