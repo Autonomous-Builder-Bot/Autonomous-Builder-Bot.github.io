@@ -336,15 +336,81 @@ const connectionCues = {
   brutal: 'Slow this one down. Hear the full answer, then reflect it back before you respond.',
   closer: 'Connection cue: ask one curious “tell me more” follow-up before the next card.'
 };
+const raceMilestones = [
+  {points:10, name:'Little Connection', rewards:[
+    'Choose the next song and have a slow dance together.',
+    'Ask for a 30-second hug and stay there until it actually feels long.',
+    'Have your partner tell you three specific things they appreciate about you.',
+    'Choose a favorite photo of you two and have your partner tell the story behind it.',
+    'Pick the next three question categories.',
+    'Get a five-minute cuddle break before the next card.'
+  ]},
+  {points:20, name:'Care Token', rewards:[
+    'Choose one small act of care your partner will do for you tomorrow.',
+    'Your partner makes your next coffee, tea, breakfast, or favorite little treat.',
+    'Claim 20 minutes of phone-free time together later.',
+    'Ask for a short back scratch, shoulder rub, or head scratch if you both want it.',
+    'Your partner writes you a short love note to read later.',
+    'Choose one cozy thing you want to do together before the day ends.'
+  ]},
+  {points:30, name:'Date Spark', rewards:[
+    'Choose the theme of your next date.',
+    'Pick one place you want the two of you to explore together.',
+    'Choose dinner or the activity for your next date.',
+    'Invent one tiny relationship tradition and try it once this week.',
+    'Your partner plans a surprise mini-date around one thing you love.',
+    'Add one shared experience to your couple bucket list and put a rough date on it.'
+  ]},
+  {points:40, name:'Big Relationship Reward', rewards:[
+    'Your partner plans an entire low-pressure date around things you love.',
+    'Choose an early or favorite date to recreate together.',
+    'Choose a half-day adventure for the two of you to do soon.',
+    'Each write a note for the other to open on a future date you choose.',
+    'Choose one relationship ritual you want to keep for the next month.',
+    'Plan one deliberately romantic night together, with the details chosen by you.'
+  ]},
+  {points:60, name:'Wildcard', rewards:[
+    'Choose one thing you have wanted more of in the relationship and turn it into a fun plan together.',
+    'You control the next date’s activity; your partner controls the food.',
+    'Pick a new experience neither of you has done and put it on the calendar.',
+    'Your partner surprises you with one thoughtful thing sometime this week.',
+    'Choose a night to make intentionally special for no particular reason.',
+    'Create a two-person challenge you both complete before the next game night.'
+  ]},
+  {points:80, name:'Date Advantage', rewards:[
+    'Choose the location for the next date and let your partner plan what happens there.',
+    'Claim one “you pick the adventure” token for a future day.',
+    'Choose one thing from your shared bucket list to move to the top.',
+    'Your partner plans a surprise evening with a budget you both agree on.',
+    'Pick an ordinary day and turn it into an anniversary-style date just because.',
+    'Choose a relationship memory you want to recreate with one new twist.'
+  ]},
+  {points:100, name:'Golden Token', rewards:[
+    'Choose a meaningful date experience you want your partner to plan for you.',
+    'Claim a future “your choice” date where you choose the vibe and your partner handles the details.',
+    'Plan a day trip together centered on something you have both wanted to do.',
+    'Choose one bigger shared experience to start saving or planning for.',
+    'Create a sealed future-date idea together and pick a month to open it.',
+    'Choose one tradition you want the two of you to still have years from now and start it.'
+  ]}
+];
+
+const secretMilestones = [50, 100, 150, 200, 300, 500];
 const gameState = {
   player: 0,
   deck: [],
   position: 0,
   turns: 0,
-  scores: [0, 0],
+  points: [0, 0],
   answered: [0, 0],
   sips: [0, 0],
-  skips: [0, 0]
+  skips: [0, 0],
+  answeredLevels: [{}, {}],
+  claimedMilestones: new Set(),
+  claimedSecrets: new Set(),
+  claimedAchievements: new Set(),
+  rewardQueue: [],
+  rewardOpen: false
 };
 
 const gameQuestion = document.getElementById('game-question');
