@@ -328,6 +328,14 @@ const coupleQuestions = [
 
 const levelNames = {easy:'Easy', warm:'Warm', vulnerable:'Vulnerable', hard:'Hard', brutal:'Brutal', closer:'Closer'};
 const players = ['Colin', 'Lyndsey'];
+const connectionCues = {
+  easy: 'Keep it light. Follow the part of the answer that makes you curious.',
+  warm: 'Stay with the good part for a second. Ask one genuine follow-up before moving on.',
+  vulnerable: 'Try to understand before trying to solve. Reflect back what you heard.',
+  hard: 'Listen all the way through before defending yourself. Start your reply with what you understood.',
+  brutal: 'Slow this one down. Hear the full answer, then reflect it back before you respond.',
+  closer: 'Connection cue: ask one curious “tell me more” follow-up before the next card.'
+};
 const gameState = {
   player: 0,
   deck: [],
