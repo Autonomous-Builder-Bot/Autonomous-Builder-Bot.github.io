@@ -396,6 +396,7 @@ const raceMilestones = [
 ];
 
 const secretMilestones = [50, 100, 150, 200, 300, 500];
+const STORAGE_KEY = 'answer-or-sip-reward-race-v1';
 const gameState = {
   player: 0,
   deck: [],
