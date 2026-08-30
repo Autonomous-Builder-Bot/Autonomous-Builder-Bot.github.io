@@ -833,8 +833,10 @@ function resetGame() {
   gameState.claimedMilestones = new Set();
   gameState.claimedSecrets = new Set();
   gameState.claimedAchievements = new Set();
-  gameState.rewardQueue = [];
+    gameState.rewardQueue = [];
   gameState.rewardOpen = false;
+  gameState.activeReward = null;
+  try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
   rewardModal.hidden = true;
   rewardModal.classList.remove('show');
   updateScoreboard();
