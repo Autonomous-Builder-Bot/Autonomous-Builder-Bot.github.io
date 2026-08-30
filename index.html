@@ -82,10 +82,16 @@
 
       
 
-      <div class="player-row" aria-label="Current player">
-        <span id="player-colin" class="player-pill active">Colin</span>
+            <div class="player-row" aria-label="Current player and points">
+        <span id="player-colin" class="player-pill active"><span>Colin</span><strong id="points-colin">0 ♥</strong></span>
         <span class="turn-arrow" aria-hidden="true">↔</span>
-        <span id="player-lyndsey" class="player-pill">Lyndsey</span>
+        <span id="player-lyndsey" class="player-pill"><span>Lyndsey</span><strong id="points-lyndsey">0 ♥</strong></span>
+      </div>
+
+      <div class="reward-race" aria-live="polite">
+        <span class="reward-race-label">Next reward</span>
+        <strong id="next-milestone">First to 10 points</strong>
+        <span id="race-progress">Colin 0 · Lyndsey 0</span>
       </div>
 
       <div class="question-shell">
