@@ -875,8 +875,9 @@ function resetGame() {
   try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
   rewardModal.hidden = true;
   rewardModal.classList.remove('show');
-  updateScoreboard();
+    updateScoreboard();
   updateRace();
+  updateRewardVault();
   buildDeck();
 }
 
