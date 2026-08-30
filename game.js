@@ -754,11 +754,20 @@ function advance(result) {
 function resetGame() {
   gameState.player = 0;
   gameState.turns = 0;
-  gameState.scores = [0, 0];
+  gameState.points = [0, 0];
   gameState.answered = [0, 0];
   gameState.sips = [0, 0];
   gameState.skips = [0, 0];
+  gameState.answeredLevels = [{}, {}];
+  gameState.claimedMilestones = new Set();
+  gameState.claimedSecrets = new Set();
+  gameState.claimedAchievements = new Set();
+  gameState.rewardQueue = [];
+  gameState.rewardOpen = false;
+  rewardModal.hidden = true;
+  rewardModal.classList.remove('show');
   updateScoreboard();
+  updateRace();
   buildDeck();
 }
 
