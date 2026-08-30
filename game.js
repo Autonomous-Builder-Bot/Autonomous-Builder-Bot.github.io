@@ -372,8 +372,9 @@ function updateDeckLabels() {
     easy: `Easy · ${counts.easy || 0} playful`,
     warm: `Warm · ${counts.warm || 0} flirty`,
     vulnerable: `Vulnerable · ${counts.vulnerable || 0} honest`,
-    hard: `Hard · ${counts.hard || 0} no hiding`,
-    brutal: `Brutal · ${counts.brutal || 0} relationship test`
+        hard: `Hard · ${counts.hard || 0} no hiding`,
+    brutal: `Brutal · ${counts.brutal || 0} relationship test`,
+    closer: `Closer · ${counts.closer || 0} bonding`
   };
 
   [...difficultySelect.options].forEach(option => {
