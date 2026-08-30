@@ -245,7 +245,7 @@ const coupleQuestions = [
   {level:'brutal', text:'If you had to decide tonight, with no fear of loneliness, sunk cost, hurting me, or starting over: would you still choose me—and why?'}
 ];
 
-const levelNames = {easy:'Easy', warm:'Warm', vulnerable:'Vulnerable', hard:'Hard'};
+const levelNames = {easy:'Easy', warm:'Warm', vulnerable:'Vulnerable', hard:'Hard', brutal:'Brutal'};
 const players = ['Colin', 'Lyndsey'];
 const gameState = {
   player: 0,
