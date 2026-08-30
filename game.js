@@ -519,10 +519,14 @@ function showNextReward() {
     button.type = 'button';
     button.className = 'reward-option';
     button.textContent = text;
-    button.addEventListener('click', () => {
+        button.addEventListener('click', () => {
       [...rewardOptions.children].forEach(option => option.disabled = true);
       button.classList.add('selected');
+      const vaultText = reward.options.length === 1 ? reward.copy : text;
+      gameState.claimedRewards.push({title: reward.title, text: vaultText});
       rewardCopy.textContent = `Locked in: ${text}`;
+      updateRewardVault();
+      saveSession();
     });
     rewardOptions.appendChild(button);
   });
