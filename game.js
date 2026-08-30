@@ -816,9 +816,10 @@ function advance(result) {
   gameState.turns += 1;
   gameState.player = currentPlayer === 0 ? 1 : 0;
   gameState.position += 1;
-  updateScoreboard();
+    updateScoreboard();
   updateRace();
   renderQuestion(true);
+  saveSession();
 }
 
 function resetGame() {
