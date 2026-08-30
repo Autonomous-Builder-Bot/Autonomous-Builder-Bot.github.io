@@ -467,8 +467,8 @@ function updateScoreboard() {
 
 function renderQuestion(animate = true) {
   if (!gameState.deck.length) return;
-  if (gameState.position >= gameState.deck.length) {
-    gameState.deck = shuffle(gameState.deck);
+    if (gameState.position >= gameState.deck.length) {
+    gameState.deck = createDeck(difficultySelect.value);
     gameState.position = 0;
   }
 
