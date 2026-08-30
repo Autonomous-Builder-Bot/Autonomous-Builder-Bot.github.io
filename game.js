@@ -483,7 +483,8 @@ function renderQuestion(animate = true) {
 
   const q = gameState.deck[gameState.position];
   const apply = () => {
-    gameQuestion.textContent = q.text;
+        gameQuestion.textContent = q.text;
+    questionPrompt.textContent = connectionCues[q.level] || 'Answer, take one sip, or skip. Lowest sip count wins.';
     turnLabel.textContent = `${players[gameState.player]}'s turn`;
     levelChip.textContent = levelNames[q.level];
     levelChip.dataset.level = q.level;
