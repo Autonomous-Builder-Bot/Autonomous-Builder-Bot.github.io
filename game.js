@@ -602,8 +602,9 @@ function restoreSession() {
     rewardModal.hidden = true;
     rewardModal.classList.remove('show');
 
-    updateScoreboard();
+        updateScoreboard();
     updateRace();
+    updateRewardVault();
     renderQuestion(false);
     showNextReward();
     return true;
