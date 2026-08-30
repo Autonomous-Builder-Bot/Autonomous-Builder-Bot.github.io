@@ -410,7 +410,8 @@ const gameState = {
   claimedMilestones: new Set(),
   claimedSecrets: new Set(),
   claimedAchievements: new Set(),
-    rewardQueue: [],
+      claimedRewards: [],
+  rewardQueue: [],
   rewardOpen: false,
   activeReward: null
 };
