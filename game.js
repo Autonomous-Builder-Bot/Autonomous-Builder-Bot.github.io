@@ -560,7 +560,8 @@ function saveSession() {
       answeredLevels: gameState.answeredLevels,
       claimedMilestones: [...gameState.claimedMilestones],
       claimedSecrets: [...gameState.claimedSecrets],
-      claimedAchievements: [...gameState.claimedAchievements],
+            claimedAchievements: [...gameState.claimedAchievements],
+      claimedRewards: gameState.claimedRewards,
       rewardQueue: gameState.rewardQueue,
       activeReward: gameState.activeReward,
       difficulty: difficultySelect.value
